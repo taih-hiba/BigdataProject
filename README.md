@@ -13,7 +13,9 @@ On commence par télécharger Docker Desktop à partir du site suivant : Docker 
 ![image](https://user-images.githubusercontent.com/78708481/211148970-0aaba6ac-c681-4ee2-a1ad-e32a9c93876f.png)
 Par la suite, on crée un nouveau dossier dans lequel on va créer un nouveau fichier docker-compose.yml, il est composé de 7 images, « Kafka », « zookeeper », « zeppelin », « Hbase », « Spark-master ».
 ![image](https://user-images.githubusercontent.com/78708481/211149025-f62217de-0998-44ea-9bae-ceafd03010ed.png)
+
 ![image](https://user-images.githubusercontent.com/78708481/211149032-61911dea-9e02-4d01-b4ae-8b3d8813fbd2.png)
+
 Pour lancer le container, on tape la commande « docker-compose up » 
 
 ![image](https://user-images.githubusercontent.com/78708481/211149054-81ce4f9a-147e-496f-af24-abdafa3e7aa0.png)
@@ -36,6 +38,7 @@ Avant de pouvoir écrire vos premiers événements, vous devez créer un topic K
 ![image](https://user-images.githubusercontent.com/78708481/211149234-7366047b-3162-4a54-b521-e800478e0dc3.png)
 
 twitter-topic: c'est le nom du topic 
+
 localhost:9092: l'adresse du brocker kafka
 
 Pour vérifier la création du topic ou bien afficher la liste des topics existants sur kafka on utilise la commande suivante
@@ -44,6 +47,35 @@ Pour vérifier la création du topic ou bien afficher la liste des topics exista
 ![image](https://user-images.githubusercontent.com/78708481/211149276-aa78fdfb-b1c5-4997-8a5a-be337f311188.png)
 
 ### 1.	Kafka Producer
+
+Créer un producteur Kafka. L'objectif est de se connecter à l'API Twitter et d'obtenir les tweets et les publier dans le topic qu'on a créé.
+
+ Ouvrez le kafka-producer.py.
+ 
+ ![image](https://user-images.githubusercontent.com/78708481/211149402-9383ed1b-4acc-48b0-b086-68b6d26bc7bf.png)
+
+Ici on spécifie les paramètres de l’api twitter
+
+![image](https://user-images.githubusercontent.com/78708481/211149418-332ad1c3-bbd6-42c7-8318-818306c53b6f.png)
+
+On s’authentifie à l’API à l’aide de la bibliothèque tweepy et on crée le producer en spécifiant l’adresse et le port du broker. « localhost :9092 ».
+
+![image](https://user-images.githubusercontent.com/78708481/211149438-da22e10b-5c4b-4fb9-aa36-44dfdc250c06.png)
+
+On envoie les données au Producer en spécifiant le nom du topic.
+
+![image](https://user-images.githubusercontent.com/78708481/211149454-d65e9be4-dd42-4667-888f-0cfa9ab1f82f.png)
+
+
+### 2.	Kafka Consumer
+Pour vérifier que les données sont présentes dans le topic on exécute le kafka-consummer .
+#### kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic twitter-topic — group my-first-app --from-beginning
+
+![image](https://user-images.githubusercontent.com/78708481/211149519-e6cf72c4-99d1-4eed-8294-2f3db6e86ea4.png)
+
+ 
+
+ 
 
 
 
