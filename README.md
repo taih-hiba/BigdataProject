@@ -95,9 +95,27 @@ On va charger les données dans notre spark dataframe. On va travailler avec une
 
 ![image](https://user-images.githubusercontent.com/78708481/211149674-92f1ba8a-136b-47cc-9822-424e31aafda4.png)
 
+On peut visualiser combien on a de donnée à caractère positif et negatif.
+
+<img width="758" alt="image" src="https://user-images.githubusercontent.com/78708481/211150217-abfb5e6f-5669-4152-a8f1-5c4d4841a303.png">
 
 ### 1.	Préparation des données
 Au niveau de cette etape de data processing, on va effectué des modification sur les données.
+
+On selectionne d'abord les colonnes utile pour le trainig à savoir text ans label (sentiment).
+
+![image](https://user-images.githubusercontent.com/78708481/211150280-5f53553a-e24a-4ee6-9a8a-b1ad1c393abd.png)
+
+On split les données en traning and testing.
+
+![image](https://user-images.githubusercontent.com/78708481/211150303-c62055a4-9c4e-48b7-bda2-03dbfed16f94.png)
+
+On commence d'abord par la separation des mots au niveau du text en utilisant tokenizer.
+
+![image](https://user-images.githubusercontent.com/78708481/211150348-1e2b215e-4752-4aae-aae9-e0ea66d2744e.png)
+
+
+
 
 
 
