@@ -192,6 +192,11 @@ On scan "twitter_tabl" dans hbase shell.
 ![image](https://user-images.githubusercontent.com/78708481/211151186-a9c64671-1a4b-4c6b-97a1-1ffd4a51cb51.png)
 
 
+## 	Contributors
+
+#### TAIH HIBA
+#### MAOUID NOUHAILA
+#### BAYD IMANE
 
 
 
