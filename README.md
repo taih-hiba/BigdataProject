@@ -21,6 +21,7 @@ Pour lancer le container, on tape la commande « docker-compose up »
 Voici les différents services sont en mode « running »
 
 ![image](https://user-images.githubusercontent.com/78708481/211149066-c2704ced-fae8-48c0-820c-1d7cda6c1a98.png)
+
 On peut aussi visualiser leurs états dans docker desktop
 
 ![image](https://user-images.githubusercontent.com/78708481/211149085-7778b5cd-8bbb-49a2-90a2-dc602c62b8b0.png)
@@ -30,6 +31,21 @@ Cette partie concerne l'envoi de tweets depuis l'API Twitter. Pour ce faire, sui
 L'avantage d'utiliser Kafka avec Twitter Stream est la tolérance aux pannes. Nous avons un premier module The Producer qui collecte les données de Twitter, puis les enregistre, et un autre module The Consumer qui lit les logs puis traite les Data. Le producteur vient d'enregistrer les données sous forme de journaux dans la file d'attente et le consommateur est responsable de la lecture de ces journaux et de leur traitement.
 Comme vous le savez, pour diffuser des données depuis Twitter, vous avez besoin d'un compte de développeur Twitter. Vous aurez besoin d’un compte de développeur Twitter et vos informations d'identification
 Avant de pouvoir écrire vos premiers événements, vous devez créer un topic Kafka. Ouvrez une session de terminal de kafka et exécutez : 
-##### kafka-topics.sh --create –topic twitter-topic --bootstrap-server localhost:9092 --replication-factor 1 --partitions 4
+#### kafka-topics.sh --create –topic twitter-topic --bootstrap-server localhost:9092 --replication-factor 1 --partitions 4
+
+![image](https://user-images.githubusercontent.com/78708481/211149234-7366047b-3162-4a54-b521-e800478e0dc3.png)
+
+twitter-topic: c'est le nom du topic 
+localhost:9092: l'adresse du brocker kafka
+
+Pour vérifier la création du topic ou bien afficher la liste des topics existants sur kafka on utilise la commande suivante
+#### kafka-topics.sh --list --bootstrap-server localhost:9092
+
+![image](https://user-images.githubusercontent.com/78708481/211149276-aa78fdfb-b1c5-4997-8a5a-be337f311188.png)
+
+### 1.	Kafka Producer
+
+
+
 
 
