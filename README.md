@@ -92,8 +92,12 @@ La première étape est la création de SparkContext. SparkContext est nécessai
 
 On va charger les données dans notre spark dataframe. On va travailler avec une twitter dataset, vous trouverez le lien ci-dessous.
 
+https://mega.nz/file/ApdlDSqR#63xhv-uX3dDNFyePcBnarQD9HWpHGDQ61CNwatfTdEM
 
 ![image](https://user-images.githubusercontent.com/78708481/211149674-92f1ba8a-136b-47cc-9822-424e31aafda4.png)
+
+les negatifs tweets sont indiqué par "0"
+les positifs tweets sont indiqué par "4"
 
 On peut visualiser combien on a de donnée à caractère positif et negatif.
 
@@ -102,7 +106,7 @@ On peut visualiser combien on a de donnée à caractère positif et negatif.
 ### 1.	Préparation des données
 Au niveau de cette etape de data processing, on va effectué des modification sur les données.
 
-On selectionne d'abord les colonnes utile pour le trainig à savoir text ans label (sentiment).
+On selectionne d'abord les colonnes utile pour le trainig à savoir text and label (sentiment).
 
 ![image](https://user-images.githubusercontent.com/78708481/211150280-5f53553a-e24a-4ee6-9a8a-b1ad1c393abd.png)
 
@@ -113,6 +117,84 @@ On split les données en traning and testing.
 On commence d'abord par la separation des mots au niveau du text en utilisant tokenizer.
 
 ![image](https://user-images.githubusercontent.com/78708481/211150348-1e2b215e-4752-4aae-aae9-e0ea66d2744e.png)
+
+on supprime les stops words.
+
+![image](https://user-images.githubusercontent.com/78708481/211150399-b539aa0c-7c67-4a96-902c-bb9f4ddbb641.png)
+
+on convertit les mots en numeric features.
+
+![image](https://user-images.githubusercontent.com/78708481/211150411-754e751e-98ae-4d2a-aded-33a5ae2c9eaa.png)
+
+### 2.	Logistic Regression
+Maintenant c'est le tour des modelzs pour l'entrainement et la classification.
+
+On utilise d'abord logistic regression.
+
+On entraine le modèle:
+
+![image](https://user-images.githubusercontent.com/78708481/211150496-08493c23-27ed-4887-9c33-509d0a50b78f.png)
+
+On prépare le testing data:
+
+![image](https://user-images.githubusercontent.com/78708481/211150509-28ffdbdb-a509-412c-b4e7-51dfcc040448.png)
+
+On passe à la prédiction en evaluant le modèle (accuracy):
+
+![image](https://user-images.githubusercontent.com/78708481/211150516-5ba352c6-1c8d-4497-99bd-94d647ae9996.png)
+
+### 3.	Naive Bayes
+
+On passe au deuxième model Naive Bayes.
+On entraine le modèle:
+
+![image](https://user-images.githubusercontent.com/78708481/211150613-a4522fc1-6644-4e4c-8cc2-cbec64831420.png)
+
+On passe à la prédiction en evaluant le modèle (accuracy):
+
+![image](https://user-images.githubusercontent.com/78708481/211150630-8850c955-8bf3-4c51-8e1a-678d1c388764.png)
+
+## V.	Prédiction avec le modèle choisi (Logistic Regression)
+ 
+Dans cette etape on va utiliser le modèle entrainé "logistic Regression" pour prédire les données en streaming en utilisant le kafka topic qu'on a créé. ainsi qu'on va stocker ces données dans la base de données HBase.
+ 
+ ### 1.	Import libraries.
+ 
+ ![image](https://user-images.githubusercontent.com/78708481/211150782-929fbec0-a596-4f72-be70-9ba395121354.png)
+
+### 2.	Connexion à Hbase 
+
+![image](https://user-images.githubusercontent.com/78708481/211150797-2894ff77-f22d-4ce7-9317-5d71f83f4861.png)
+
+On va créer une fonction insert rows pour insérer les données en streaming.ainsi qu'on va tester la connexion avec Hbase.
+
+![image](https://user-images.githubusercontent.com/78708481/211150825-ac05690b-1ab3-40f8-a7d9-001100e5feda.png)
+
+### 3. Streaming process
+
+![image](https://user-images.githubusercontent.com/78708481/211150883-c969aad0-866d-4c96-b589-9459d83cb801.png)
+
+![image](https://user-images.githubusercontent.com/78708481/211150893-5575c088-192e-47c0-aa52-d0cdb29bda58.png)
+
+Au niveau de cette etape on récupère les tweets en streaming en effectue le processing sur ces tweets et on prédit les sentiments en utilisant le modèle entrainé, on stocke ainsi les données sur HBase. ainsi qu'on effectue une visualisation des données en indiquant le nombre de tweets negatif et positifs.
+
+le resultat est comme suit.
+
+<img width="749" alt="image" src="https://user-images.githubusercontent.com/78708481/211151047-59bb2190-a9a7-419d-bd3b-b7763710d662.png">
+
+<img width="699" alt="image" src="https://user-images.githubusercontent.com/78708481/211151085-50c08652-c866-486e-8703-b6c2889c2bf2.png">
+
+### 4.	Verification des données dans hbase
+On peut vérifié le stockage des données dans hbase .
+
+On scan "twitter_tabl" dans hbase shell.
+
+![image](https://user-images.githubusercontent.com/78708481/211151186-a9c64671-1a4b-4c6b-97a1-1ffd4a51cb51.png)
+
+
+
+
+
 
 
 
